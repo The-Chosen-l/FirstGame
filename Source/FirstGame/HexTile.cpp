@@ -13,4 +13,9 @@ AHexTile::AHexTile()
     TileStaticMesh->SetupAttachment(RootComponent);
 }
 
-
+// Called when the game starts or when spawned
+void AHexTile::BeginPlay()
+{
+	Super::BeginPlay();
+	GEngine->AddOnScreenDebugMessage(1, 5, FColor::Blue, TEXT("Hello Cpp hex"));
+}

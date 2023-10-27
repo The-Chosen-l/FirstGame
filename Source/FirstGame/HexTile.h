@@ -11,28 +11,33 @@ class UStaticMeshComponent;
 UENUM()
 enum class EHexTileType : uint8
 {
-	INVALID,
+	NONE,
 	GROUND,
 	PLATFORM,
-	MAX UMETA(Hidden)
+	MAX UMETA(Hidden)	
 };
 
 UCLASS()
 class FIRSTGAME_API AHexTile : public AActor
 {
 	GENERATED_BODY()
-	
+
+public:
+	UPROPERTY(VisibleInstanceOnly, BlueprintReadOnly, Category = "Tile")
+	FIntPoint TileIndex;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Tile")
+	UStaticMeshComponent* TileStaticMesh;
+
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Tile")
 	EHexTileType TileType;
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Tile")
-	UStaticMeshComponent* TileStaticMesh;
-
 public:	
 	// Sets default values for this actor's properties
 	AHexTile();
 
-
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 
 };
